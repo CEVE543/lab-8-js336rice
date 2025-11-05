@@ -82,7 +82,7 @@ We begin with usual project management
 using Pkg
 lab_dir = dirname(@__FILE__)
 Pkg.activate(lab_dir)
-# Pkg.instantiate() # uncomment this the first time you run the lab to install packages, then comment it back
+#Pkg.instantiate() # uncomment this the first time you run the lab to install packages, then comment it back
 ```
 
 and load all packages
@@ -574,8 +574,21 @@ Answer the following questions about the weather typing methodology:
 ### Implementation Questions
 
 - Explain in your own words what the `assign_to_nearest_centroid` function does and why it's important for k-means clustering.
+
+    `assign_to_nearest_centroid` computes the euclidian distance from each point to each centroid, then finds the shortest distance for that point from the list of distances from that point to each centroid, and assigns it to the centroid that's closest to it. 
+
+    This is important for k-means clustering because we are trying to group the points by the centroids they're closest to.  If we want to do this, we need to know which centroid that is. 
+
+
 - Explain in your own words what the `update_centroids` function does and why it's important for k-means clustering.
+
+    `update_centroids` finds the mean location of all points assigned to a given centroid, and then updates that centroid to this new mean location.  This is important for k-means clustering because we need our centroids to converge towards the center of each cluster, and this is what allows them to do that. 
+
+
+
 - Why does k-means use squared Euclidean distance rather than absolute distance? What would happen if you used absolute distance instead?
+
+    K-means uses squared Euclidean distance because this is how we accurately calculate the distance between 2 points in 2D Euclidean space.  If we were to use absolute distance, we might incorrecly compare the distances between points, and not obtain proper convergence. 
 
 ### Weather Typing Analysis
 
