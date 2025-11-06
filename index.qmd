@@ -293,8 +293,9 @@ function plot_streamfunction_anomaly(sample_date::Date)
     Colorbar(fig[1, 2], hm, label=L"Streamfunction Anomaly ($10^6$ m$^2$/s)")
     fig
 end
-plot_streamfunction_anomaly(Date(2015, 12, 14))
+plot_streamfunction_anomaly(Date(2015, 11, 15))
 ```
+
 
 ### Step 1: Principal Component Analysis
 
@@ -593,8 +594,30 @@ Answer the following questions about the weather typing methodology:
 ### Weather Typing Analysis
 
 - Visualize streamfunction anomalies for at least 3 different days. Then, identify the weather types for each day. How well do individual days match their cluster composite patterns?
+
+    December 15th, 2015 is similar to EOF 4, or Weather Type 2.  
+
+    November 15th, 2015 is similar to EOF 3, or Weather Type 1
+
+    November 30th, 2015 is arguably similar in structure to Weather Type 1, but doesn't seem to match any of the EOF's.
+
+    Generally, days do seem to match their weather types, although some days match closer than others.  
+
+
 - Do your EOF spatial patterns match those shown in the paper?
+
+    Yes!  The EOF's in this lab appear to be a lower-resolution version of the four EOF's seen in figure 5 of the paper. 
+
 - Do your weather type composites used with default settings (approximately matching the paper) match those in the paper? If not, why might they differ?
+
+    Weather types 1 and 2 between the lab and the paper seem to have swithced places.  After that the weather types don't seem very similar, until we get to weather type 6. 
+    
+    With weather type 1 being 21.3% of days in the paper, and weather type 2 being 18.4%, it's possible that we converged towards slightly different clusters in the lab as we did in the paper.  Additionally, the paper utilized data from 1979 to 2016, while our lab used data from 1979 to 2025.  It's possible that with a few more years of data, we clustered slighly differently, especially if there were climatic non-stationarities that impacted the data in those last few years, or if ENSO swung one way more than the other during those years. 
+
 - What is the effect of changing the number of retained PCs on the weather type patterns?
+
+    
+
+
 - What is the effect of rescaling PCs before clustering? Try clustering without rescaling and compare results.
 - What is the impact of changing the number of clusters (k) on the weather type patterns?
