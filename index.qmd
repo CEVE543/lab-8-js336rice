@@ -473,12 +473,17 @@ Rescaling PCs to have equal variance gives each mode equal importance in the clu
 
 ```{julia}
 #| output: false
-rescale_pcs = true
+rescale_pcs = false
 if rescale_pcs
     pc_scores_scaled = (pc_scores .- mean(pc_scores, dims=1)) ./ std(pc_scores, dims=1)
 else
-    pc_scores_scaled = pc_scores
+    #pc_scores_scaled = pc_scores
+    pc_scores_scaled = Matrix(pc_scores) #Do this to prevent an error later in the code
 end
+
+
+println(typeof(pc_scores_scaled))
+println(typeof(pc_scores))
 ```
 
 #### Choosing the Number of Clusters
@@ -616,8 +621,20 @@ Answer the following questions about the weather typing methodology:
 
 - What is the effect of changing the number of retained PCs on the weather type patterns?
 
-    
+    If we use too few PC's, we can only look at the most dominant weather patterns, and we lose a lot of the variability in our data.  If we use too many, we may begin to overfit, or find principal components that don't necessarily reflect meaningful trends. 
 
 
 - What is the effect of rescaling PCs before clustering? Try clustering without rescaling and compare results.
+
+    Rescaling equalized the variance across principal components, so that we don't weight as heavily towards components that explain the most variance.  Although we are very interested in seeing which components explain the most variance, when we don't rescale, we end up with more than one similar looking weather types, and don't explain a diversity of trends as well as when we rescale.  There is some subtlety lost in the weather types that we can capture, since the one's were viewing are less distinct from each other.  The "big" clusteres dominate.
+
+
 - What is the impact of changing the number of clusters (k) on the weather type patterns?
+
+
+    Decreasing K lets us capture less unique trends.  We capture the more general weather patterns, but aren't able to identify all of the unique clusters as well, and some important clusters might not be detected. 
+
+    Increasing K lets us capture more trends and have more information in our results, but if we do it too much, we might be trying to converge towards clusters that don't actually exist, or we might split meaningful and distinct clusters in half. 
+
+
+
